@@ -73,6 +73,12 @@ public class ProductController {
         List<Product> result = productService.findBySkuProduct(skuProduct);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    @GetMapping(value = "/findProductByName/{nameProduct}")
+    public ResponseEntity<Object> getProductByName(@PathVariable String nameProduct) {
+        List<Product> result = productService.findByNameProduct(nameProduct);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 }
     
 
