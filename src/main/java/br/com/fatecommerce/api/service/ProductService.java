@@ -54,5 +54,20 @@ public class ProductService {
         
     }
 
- 
+    public Optional<Product> findByEanProduct(String eanProduct) {
+        return Optional.ofNullable(productRepository.findByEanProduct(eanProduct)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto com EAN " + eanProduct + " não encontrado!")));
+    }
+
+  
+    public List<Product> findBySku(String skuProduct) {
+        List<Product> products = productRepository.findBySkuProduct(skuProduct);
+        if (products.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto com SKU " + skuProduct + " não encontrado!");
+        }
+        return products;
+    }
 }
+
+ 
+
