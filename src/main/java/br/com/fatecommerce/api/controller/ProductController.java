@@ -2,6 +2,7 @@ package br.com.fatecommerce.api.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,11 +53,26 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
+    
+
     @PutMapping(value = "/update")
     public ResponseEntity<Object> updateProduct(@RequestBody Product product) {
         Product result = productService.updProduct(product);
         return ResponseEntity.status(HttpStatus.OK).body(result);
 
     }
-    
+
+    @GetMapping(value = "/findProductByEan/{eanProduct}")
+    public ResponseEntity<Object> getProductByEan(@PathVariable String eanProduct) {
+        Optional<Product> result = productService.findByEanProduct(eanProduct);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping(value = "/findProductBySku/{skuProduct}")
+    public ResponseEntity<Object> getProductBySku(@PathVariable String skuProduct) {
+        List<Product> result = productService.findBySkuProduct(skuProduct);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 }
+    
+
