@@ -60,14 +60,20 @@ public class ProductService {
     }
 
   
-    public List<Product> findBySku(String skuProduct) {
+    public List<Product> findBySkuProduct(String skuProduct) {
+        if(skuProduct != null || !skuProduct.equals("")){
         List<Product> products = productRepository.findBySkuProduct(skuProduct);
-        if (products.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto com SKU " + skuProduct + " não encontrado!");
+        if (!products.isEmpty()) {
+            return products;
+        } else{ 
+
+throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto com SKU " + skuProduct + " não encontrado!");
         }
-        return products;
+    }else{
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum produto encontrado ");
     }
-}
+       
+}}
 
  
 
